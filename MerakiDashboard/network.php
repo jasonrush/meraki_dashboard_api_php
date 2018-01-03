@@ -90,6 +90,20 @@ final class Network extends ApiClient
         return $request_data['content_decoded'];
     }
 
+    public function set_l3FirewallRules( $rules )
+    {
+        $result = $this->put(
+            'networks/'.$this->id.'/l3FirewallRules',
+            $rules
+        );
+
+        if( isset( $result['content_decoded'] ) && is_array( $result['content_decoded'] ) ){
+            return true;
+        }
+
+        return false;
+    }
+
     public function get_groupPolicies()
     {
         $request_data = $this->_dashboard->get( 'networks/'.$this->id.'/groupPolicies' );
